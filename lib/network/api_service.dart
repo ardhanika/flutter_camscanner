@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:docscan/network/endpoint.dart';
 import 'package:docscan/model/general_response.dart';
 import 'package:docscan/model/store_data_user_request.dart';
-import 'package:docscan/model/data_model.dart';
+import 'package:docscan/bloc/auth/auth_repository.dart';
 
 class ApiService {
   final _dio = Dio();
@@ -11,9 +11,10 @@ class ApiService {
   final String baseUrl = "http://127.0.0.1:8000";
 
   Future<UserResponse> getDataUser() async {
+    final token = await AuthRepository().hasToken();
     final _response = await _dio.get(Endpoint.getDataUser,
         // $TokenAuth belum fix
-        options: Options(headers: {"authorization": "Bearer $TokenAuth"}));
+        options: Options(headers: {"authorization": "Bearer $token"}));
 
     return UserResponse.fromJson(_response.data);
   }

@@ -1,4 +1,4 @@
-import 'package:docscan/blocs/Auth_bloc.dart';
+import 'package:docscan/bloc/auth/auth_bloc.dart';
 import 'package:docscan/pages/login.dart';
 import '../theme.dart';
 import 'package:flutter/material.dart';

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import '../state/auth_state.dart';
+import 'package:docscan/bloc/auth/auth_state.dart';
 import '../theme.dart';
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:docscan/blocs/Auth_bloc.dart';
-import 'package:docscan/event/auth_event.dart';
+import 'package:docscan/bloc/auth/auth_bloc.dart';
+import 'package:docscan/bloc/auth/auth_event.dart';
 
 class LoginPage extends StatefulWidget {
   final AuthBloc authBloc;
