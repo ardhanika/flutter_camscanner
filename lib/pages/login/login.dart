@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
 class LoginForm extends StatefulWidget {
   final AuthBloc authBloc;
 
-  LoginForm({Key? key, required this.authBloc}) : super(key: key);
+  const LoginForm({Key? key, required this.authBloc}) : super(key: key);
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -52,7 +52,7 @@ class _LoginFormState extends State<LoginForm> {
           resizeToAvoidBottomInset: false,
           backgroundColor: Colors.white,
           body: Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class _LoginFormState extends State<LoginForm> {
                         width: 40,
                       ),
                       Container(
-                        margin: EdgeInsets.only(left: 15),
+                        margin: const EdgeInsets.only(left: 15),
                       ),
                       Text(
                         "Scanner App",
@@ -73,7 +73,7 @@ class _LoginFormState extends State<LoginForm> {
                       )
                     ],
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(top: 80),
                   ),
                   Text(
@@ -81,36 +81,36 @@ class _LoginFormState extends State<LoginForm> {
                     style: title,
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+                    padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
                     child: TextFormField(
-                      cursorColor: Color(0x1a34395E),
+                      cursorColor: const Color(0x1a34395E),
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       autofocus: false,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.email),
+                        icon: const Icon(Icons.email),
                         iconColor: purple,
                         hintText: 'email',
                         contentPadding:
-                            EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                            const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20.0)),
                       ),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 30),
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 30),
                     child: TextFormField(
-                      cursorColor: Color(0x1a34395E),
+                      cursorColor: const Color(0x1a34395E),
                       controller: passwordController,
                       obscureText: true,
                       autofocus: false,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.key),
+                        icon: const Icon(Icons.key),
                         iconColor: purple,
                         hintText: 'password',
                         contentPadding:
-                            EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                            const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20.0)),
                       ),
@@ -134,7 +134,7 @@ class _LoginFormState extends State<LoginForm> {
                     ],
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 30),
+                    margin: const EdgeInsets.only(top: 30),
                     height: 50,
                     width: 500,
                     child: TextButton(
@@ -145,7 +145,7 @@ class _LoginFormState extends State<LoginForm> {
                           )),
                       // onPressed: () {},
                       onPressed: _login,
-                      child: Text(
+                      child: const Text(
                         "Sign In",
                         style: TextStyle(
                           color: Color(0xffffffff),
@@ -153,10 +153,10 @@ class _LoginFormState extends State<LoginForm> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  (state is LoginFailed) ? Text(state.error) : Text(""),
+                  (state is LoginFailed) ? Text(state.error) : const Text(""),
                 ],
               ),
             ),

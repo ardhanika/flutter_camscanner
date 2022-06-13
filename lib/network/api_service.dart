@@ -14,15 +14,16 @@ class ApiService {
   final String baseUrl = "http://127.0.0.1:8000";
   String token = '';
 
-  _loadToken() async {
+  Future _loadToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = (prefs.getString('sanctum_token') ?? '');
+    token = (prefs.getString('token_sanctum') ?? '');
+    return token;
   }
 
   Future<UserResponse> getDataUser() async {
-    _loadToken();
+    final token = await _loadToken();
     final _response = await _dio.get(Endpoint.getDataUser,
-        // $TokenAuth belum fix
+        // $token masih manuals
         options: Options(headers: {"authorization": "Bearer $token"}));
 
     return UserResponse.fromJson(_response.data);
