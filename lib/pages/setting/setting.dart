@@ -1,5 +1,5 @@
-import 'package:docscan/pages/account.dart';
-import 'package:docscan/theme.dart';
+import 'package:docscan/pages/account/account.dart';
+import 'package:docscan/component/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';

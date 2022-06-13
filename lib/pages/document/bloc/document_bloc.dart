@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:equatable/equatable.dart';
-import 'package:docscan/service/document_service.dart';
-import 'package:docscan/service/connectivity_service.dart';
+import 'package:docscan/services/document_service.dart';
+import 'package:docscan/services/connectivity_service.dart';
 
 part 'document_event.dart';
 part 'document_state.dart';

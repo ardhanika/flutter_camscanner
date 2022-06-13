@@ -65,12 +65,12 @@
 //   }
 // }
 
-import 'package:docscan/bloc/auth/auth_bloc.dart';
-import 'package:docscan/pages/document.dart';
-import 'package:docscan/pages/scan.dart';
-import 'package:docscan/pages/settings.dart';
+import 'package:docscan/pages/login/bloc/auth_bloc.dart';
+import 'package:docscan/pages/document/document.dart';
+import 'package:docscan/pages/scan/scan.dart';
+import 'package:docscan/pages/setting/setting.dart';
 
-import '../theme.dart';
+import '/component/theme.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   final screen = [
-    Document(),
+    const Document(),
     const Scan(),
     const SettingPage(),
   ];

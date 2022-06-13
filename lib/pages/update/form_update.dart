@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:docscan/network/api_service.dart';
 import 'package:docscan/model/data_user_model.dart';
 
-import '../model/store_data_user_request.dart';
+import '/model/store_data_user_request.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 

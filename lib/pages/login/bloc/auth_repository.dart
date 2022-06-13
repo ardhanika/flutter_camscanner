@@ -66,6 +66,8 @@ class AuthRepository {
     Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
     final SharedPreferences local = await _prefs;
     local.setString("token_sanctum", token);
+
+    return token;
   }
 
   Future unsetLocalToken() async {

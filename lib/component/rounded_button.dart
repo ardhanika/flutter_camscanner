@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:docscan/constants.dart';
+import 'package:docscan/component/constants.dart';
 
 class RoundedButton extends StatefulWidget {
   final String text;

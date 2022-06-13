@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:docscan/network/api_service.dart';
 import 'package:docscan/model/data_user_model.dart';
 
-import 'form_update.dart';
+import '../update/form_update.dart';
 
 class Document extends StatefulWidget {
+  const Document({Key? key}) : super(key: key);
+
   @override
   _DocumentState createState() => _DocumentState();
 }
 
 class _DocumentState extends State<Document> {
+  @override
   late BuildContext context;
   late ApiService apiService;
 

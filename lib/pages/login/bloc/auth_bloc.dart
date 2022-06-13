@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:docscan/bloc/auth/auth_event.dart';
+import 'package:docscan/pages/login/bloc/auth_event.dart';
 import 'package:docscan/model/data_model.dart';
-import 'package:docscan/bloc/auth/auth_repository.dart';
-import 'package:docscan/bloc/auth/auth_state.dart';
+import 'package:docscan/pages/login/bloc/auth_repository.dart';
+import 'package:docscan/pages/login/bloc/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   // AuthBloc({required this.authRepository}) : assert(authRepository != null);

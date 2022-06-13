@@ -1,6 +1,6 @@
-import 'package:docscan/bloc/auth/auth_bloc.dart';
-import 'package:docscan/pages/login.dart';
-import '../theme.dart';
+import 'package:docscan/pages/login/bloc/auth_bloc.dart';
+import 'package:docscan/pages/login/login.dart';
+import 'theme.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatelessWidget {
