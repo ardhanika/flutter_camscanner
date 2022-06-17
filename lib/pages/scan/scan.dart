@@ -52,96 +52,94 @@ class _ScanState extends State<Scan> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: purple,
-          title: const Text('Scanner App'),
-        ),
-        body: FutureBuilder<PermissionStatus>(
-          future: cameraPermissionFuture,
-          builder:
-              (BuildContext context, AsyncSnapshot<PermissionStatus> snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.data!.isGranted) {
-                return Stack(
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Expanded(
-                          child: scannedDocument != null
-                              ? Image(image: FileImage(scannedDocument!))
-                              : DocumentScanner(
-                                  // documentAnimation: false,
-                                  // noGrayScale: false,
-                                  onDocumentScanned:
-                                      (ScannedImage scannedImage) {
-                                    print("document : " +
-                                        scannedImage.croppedImage!);
+          appBar: AppBar(
+            backgroundColor: purple,
+            title: const Text('Scanner App'),
+          ),
+          body: FutureBuilder<PermissionStatus>(
+            future: cameraPermissionFuture,
+            builder: (BuildContext context,
+                AsyncSnapshot<PermissionStatus> snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.data!.isGranted)
+                  return Stack(
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          Expanded(
+                            child: scannedDocument != null
+                                ? Image(image: FileImage(scannedDocument!))
+                                : DocumentScanner(
+                                    // documentAnimation: false,
+                                    // noGrayScale: false,
+                                    onDocumentScanned:
+                                        (ScannedImage scannedImage) {
+                                      print("document : " +
+                                          scannedImage.croppedImage!);
 
-                                    setState(() {
-                                      scannedDocument = scannedImage
-                                          .getScannedDocumentAsFile();
+                                      setState(() {
+                                        scannedDocument = scannedImage
+                                            .getScannedDocumentAsFile();
 
-                                      // imageLocation = image;
-                                    });
-                                  },
-                                ),
-                        ),
-                      ],
-                    ),
-                    scannedDocument != null
-                        ? Positioned(
-                            bottom: 20,
-                            left: 0,
-                            right: 0,
-                            child: RaisedButton(
-                              onPressed: () {
-                                // loaded ? img : scannedDocument;
-                                useFilter();
+                                        // imageLocation = image;
+                                      });
+                                    },
+                                  ),
+                          ),
+                        ],
+                      ),
+                      scannedDocument != null
+                          ? Positioned(
+                              bottom: 20,
+                              left: 0,
+                              right: 0,
+                              child: RaisedButton(
+                                onPressed: () {
+                                  // loaded ? img : scannedDocument;
+                                  useFilter();
 
-                                img = Image.file(scannedDocument!);
-                                // setState(() {
-                                //   scannedDocument = useFilter();
-                                //   // useFilter();
-                                //   // scannedImage = res;
-                                // });
-                              },
-                              child: const Text("Blur"),
-                            ),
+                                  img = Image.file(scannedDocument!);
+                                  // setState(() {
+                                  //   scannedDocument = useFilter();
+                                  //   // useFilter();
+                                  //   // scannedImage = res;
+                                  // });
+                                },
+                                child: Text("Blur"),
+                              ),
 
-                            // RaisedButton(
-                            //     color: Colors.red,
-                            //     child: Text("Retry"),
-                            //     onPressed: () {
-                            //       setState(() {
-                            //         scannedDocument = null;
-                            //       });
-                            //     }),
-                            // RaisedButton(
-                            //   onPressed: () async {
-                            //     res = await ImgProc.dilate(
-                            //         await scannedDocument
-                            //             ?.readAsBytes(),
-                            //         [2, 2]);
-                            //   },
-                            //   child: Text("Dilate n 2D"),
-                            // ),
-                          )
-                        : Container(),
-                  ],
-                );
+                              // RaisedButton(
+                              //     color: Colors.red,
+                              //     child: Text("Retry"),
+                              //     onPressed: () {
+                              //       setState(() {
+                              //         scannedDocument = null;
+                              //       });
+                              //     }),
+                              // RaisedButton(
+                              //   onPressed: () async {
+                              //     res = await ImgProc.dilate(
+                              //         await scannedDocument
+                              //             ?.readAsBytes(),
+                              //         [2, 2]);
+                              //   },
+                              //   child: Text("Dilate n 2D"),
+                              // ),
+                            )
+                          : Container(),
+                    ],
+                  );
+                else
+                  return Center(
+                    child: Text("Camera permission denied"),
+                  );
               } else {
-                return const Center(
-                  child: Text("Camera permission denied"),
+                return Center(
+                  child: CircularProgressIndicator(),
                 );
               }
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        ),
-      ),
+            },
+          )),
     );
   }
 }

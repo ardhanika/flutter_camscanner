@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:docscan/network/api_service.dart';
 import 'package:docscan/model/data_user_model.dart';
 
-import '../update/form_update.dart';
+import 'package:docscan/pages/update/form_update.dart';
 
 class Document extends StatefulWidget {
-  const Document({Key? key}) : super(key: key);
-
   @override
   _DocumentState createState() => _DocumentState();
 }
@@ -29,7 +27,7 @@ class _DocumentState extends State<Document> {
     return SafeArea(
       child: FutureBuilder(
         future: apiService.getDataUser(),
-        builder: (BuildContext context, AsyncSnapshot<UserResponse> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Text(

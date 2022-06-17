@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   final screen = [
-    const Document(),
+    Document(),
     const Scan(),
     const SettingPage(),
   ];

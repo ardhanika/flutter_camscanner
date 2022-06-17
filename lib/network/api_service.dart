@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:docscan/model/data_user_model.dart';
@@ -6,12 +7,11 @@ import 'package:docscan/network/endpoint.dart';
 import 'package:docscan/model/general_response.dart';
 import 'package:docscan/model/store_data_user_request.dart';
 import 'package:docscan/pages/login/bloc/auth_repository.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
   final _dio = Dio();
-  // final String baseUrl = "http://10.0.2.2:8000";
-  final String baseUrl = "http://127.0.0.1:8000";
   String token = '';
 
   Future _loadToken() async {
@@ -20,13 +20,33 @@ class ApiService {
     return token;
   }
 
-  Future<UserResponse> getDataUser() async {
+  // List<UserResponse> dataUser(String responseBody) {
+  //   var list = jsonDecode(responseBody) as List<dynamic>;
+  //   List<UserResponse> dataUsers = list
+  //       .map((model) => UserResponse.fromJson(model))
+  //       .cast<UserResponse>()
+  //       .toList();
+  //   return dataUsers;
+  // }
+
+  // Future<List<UserResponse>> fetchData() async {
+  //   final token = await _loadToken();
+  //   final _response = await _dio.get(Endpoint.getDataUser,
+  //       options: Options(headers: {"authorization": "Bearer $token"}));
+
+  //   if (_response.statusCode == 200) {
+  //     return compute(dataUser, _response.data);
+  //   } else {
+  //     throw Exception('Error API');
+  //   }
+  // }
+
+  Future<UserDataResponse> getDataUser() async {
     final token = await _loadToken();
     final _response = await _dio.get(Endpoint.getDataUser,
-        // $token masih manuals
         options: Options(headers: {"authorization": "Bearer $token"}));
 
-    return UserResponse.fromJson(_response.data);
+    return UserDataResponse.fromJson(jsonDecode(_response.data));
   }
 
   Future<GeneralResponse> createDataUser(StoreDataUserRequest request) async {
@@ -35,7 +55,7 @@ class ApiService {
       data: request.toJson(),
     );
 
-    return GeneralResponse.fromJson(_response.data);
+    return GeneralResponse.fromJson(_response.data[0]);
   }
 
   Future<GeneralResponse> updateDataUser(StoreDataUserRequest request) async {
@@ -59,7 +79,7 @@ class ApiService {
     FormData formData = FormData.fromMap({
       "file": await MultipartFile.fromFile(file.path, filename: fileName),
     });
-    final _response = await _dio.post("/info", data: formData);
+    final _response = await _dio.post(Endpoint.createDataUser, data: formData);
     return _response.data['id'];
   }
 }

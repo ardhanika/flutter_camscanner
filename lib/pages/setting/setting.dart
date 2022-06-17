@@ -3,6 +3,7 @@ import 'package:docscan/component/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:docscan/pages/login/bloc/auth_repository.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   void _launchURL() async {
-    const url = 'http://127.0.0.1:8000';
+    const url = 'http://dhanjay.online';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -87,7 +88,11 @@ class _SettingPageState extends State<SettingPage> {
                       const Padding(padding: EdgeInsets.only(top: 25)),
                       menuSetting('About App', 'Lorem ipsum dolor sit amet'),
                       const Padding(padding: EdgeInsets.only(top: 25)),
-                      menuSetting('Log Out', 'Lorem ipsum dolor sit amet'),
+                      GestureDetector(
+                        onTap: _launchURL, //harusnya userlogout dari auth repo
+                        child:
+                            menuSetting('Logout', 'Lorem ipsum dolor sit amet'),
+                      ),
                     ]),
               )
             ],

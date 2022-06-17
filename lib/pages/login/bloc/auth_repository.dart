@@ -5,10 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
   Future loginUser(String _email, String _password) async {
-    // String baseUrl = "http://127.0.0.1:8000/api/auth/login";
-    var baseUrl = Uri.parse("http://127.0.0.1:8000/api/auth/login");
-    // String baseUrl = "http://10.0.2.2:8000/api/auth/login";
-    // var baseUrl = Uri.parse("http://10.0.2.2:8000/api/auth/login");
+    var baseUrl = Uri.parse("http://dhanjay.online/api/auth/login");
 
     try {
       var response = await http.post(baseUrl, body: {
@@ -24,8 +21,7 @@ class AuthRepository {
   }
 
   Future userLogout(String token) async {
-    // String baseUrl = "http://127.0.0.1:8000/api/auth/logout";
-    var baseUrl = Uri.parse("http://10.0.2.2:8000/api/auth/logout");
+    var baseUrl = Uri.parse("http://dhanjay.online/api/auth/logout");
     try {
       var response = await http.post(baseUrl, headers: {
         'Authorization': 'Bearer $token',
@@ -40,7 +36,7 @@ class AuthRepository {
   }
 
   Future getData(String token) async {
-    String baseUrl = "http://127.0.0.1:8000/api/me";
+    String baseUrl = "http://dhanjay.online/api/me";
 
     try {
       var response = await http.get(Uri.parse(baseUrl), headers: {
