@@ -11,7 +11,6 @@ class Document extends StatefulWidget {
 }
 
 class _DocumentState extends State<Document> {
-  @override
   late BuildContext context;
   late ApiService apiService;
 
@@ -27,7 +26,7 @@ class _DocumentState extends State<Document> {
     return SafeArea(
       child: FutureBuilder(
         future: apiService.getDataUser(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<UserResponse> snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Text(
@@ -151,6 +150,7 @@ class _DocumentState extends State<Document> {
     );
   }
 }
+
 
 // II
 // import 'dart:convert';

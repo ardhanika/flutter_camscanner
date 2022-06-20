@@ -46,7 +46,7 @@ class ApiService {
     final _response = await _dio.get(Endpoint.getDataUser,
         options: Options(headers: {"authorization": "Bearer $token"}));
 
-    final listUser = UserResponse.fromJson(jsonDecode(_response.data));
+    final listUser = UserResponse.fromJson(_response.data);
     return listUser;
   }
 
