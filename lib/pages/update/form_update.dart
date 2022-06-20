@@ -90,7 +90,7 @@ class _FormAddScreenState extends State<FormAddScreen> {
                           _controllerDescription.text.toString();
                       String image = _controllerImage.text.toString();
                       StoreDataUserRequest dataUser = StoreDataUserRequest(
-                          idUser: 1,
+                          idUser: '1',
                           nama: nama,
                           description: description,
                           image: image);
