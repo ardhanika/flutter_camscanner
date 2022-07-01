@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
-  Future loginUser(String _email, String _password) async {
+  Future<LoginAuth> loginUser(String _email, String _password) async {
     var baseUrl = Uri.parse("http://camscanner.putraprima.id/api/auth/login");
 
     try {
@@ -16,7 +16,7 @@ class AuthRepository {
       var jsonResponse = json.decode(response.body);
       return LoginAuth.fromJson(jsonResponse);
     } catch (e) {
-      return e;
+      return LoginAuth(status: "failed", data: null);
     }
   }
 

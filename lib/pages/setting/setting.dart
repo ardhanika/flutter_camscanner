@@ -35,7 +35,7 @@ class _SettingPageState extends State<SettingPage> {
     });
 
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => LoginForm(authBloc: authBloc)));
+        MaterialPageRoute(builder: (context) => LoginPage(authBloc: authBloc)));
   }
 
   @override
