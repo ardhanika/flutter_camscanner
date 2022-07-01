@@ -109,7 +109,9 @@ class _FormAddScreenState extends State<FormAddScreen> {
                       } else {
                         dataUser =
                             dataUser.copyWith(idUser: widget.datauser.idUser);
-                        _apiService.updateDataUser(dataUser).then((response) {
+                        _apiService
+                            .updateDataUser(dataUser, widget.datauser.id)
+                            .then((response) {
                           setState(() => _isLoading = false);
                           if (response.isSuccess) {
                             Navigator.pop(

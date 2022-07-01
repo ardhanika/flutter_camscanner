@@ -1,9 +1,11 @@
 import 'package:docscan/pages/account/account.dart';
 import 'package:docscan/component/theme.dart';
+import 'package:docscan/pages/login/bloc/auth_bloc.dart';
+import 'package:docscan/pages/login/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:docscan/pages/login/bloc/auth_repository.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -13,13 +15,25 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
+  late final AuthBloc authBloc = authBloc;
+
   void _launchURL() async {
-    const url = 'http://dhanjay.online';
+    const url = 'http://camscanner.putraprima.id';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  logOut() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      preferences.remove("token_sanctum");
+    });
+
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => LoginForm(authBloc: authBloc)));
   }
 
   @override
@@ -89,7 +103,17 @@ class _SettingPageState extends State<SettingPage> {
                       menuSetting('About App', 'Lorem ipsum dolor sit amet'),
                       const Padding(padding: EdgeInsets.only(top: 25)),
                       GestureDetector(
-                        onTap: _launchURL, //harusnya userlogout dari auth repo
+                        onTap: () async {
+                          SharedPreferences pref =
+                              await SharedPreferences.getInstance();
+                          await pref.clear();
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    LoginPage(authBloc: authBloc),
+                              ),
+                              (route) => false);
+                        },
                         child:
                             menuSetting('Logout', 'Lorem ipsum dolor sit amet'),
                       ),

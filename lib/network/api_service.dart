@@ -20,34 +20,12 @@ class ApiService {
     return token;
   }
 
-  // List<UserResponse> dataUser(String responseBody) {
-  //   var list = jsonDecode(responseBody) as List<dynamic>;
-  //   List<UserResponse> dataUsers = list
-  //       .map((model) => UserResponse.fromJson(model))
-  //       .cast<UserResponse>()
-  //       .toList();
-  //   return dataUsers;
-  // }
-
-  // Future<List<UserResponse>> fetchData() async {
-  //   final token = await _loadToken();
-  //   final _response = await _dio.get(Endpoint.getDataUser,
-  //       options: Options(headers: {"authorization": "Bearer $token"}));
-
-  //   if (_response.statusCode == 200) {
-  //     return compute(dataUser, _response.data);
-  //   } else {
-  //     throw Exception('Error API');
-  //   }
-  // }
-
   Future<UserResponse> getDataUser() async {
     final token = await _loadToken();
     final _response = await _dio.get(Endpoint.getDataUser,
         options: Options(headers: {"authorization": "Bearer $token"}));
 
-    final listUser = UserResponse.fromJson(_response.data);
-    return listUser;
+    return UserResponse.fromJson(_response.data);
   }
 
   Future<GeneralResponse> createDataUser(StoreDataUserRequest request) async {
@@ -59,18 +37,21 @@ class ApiService {
     return GeneralResponse.fromJson(_response.data[0]);
   }
 
-  Future<GeneralResponse> updateDataUser(StoreDataUserRequest request) async {
-    final _response = await _dio.put(
-      Endpoint.updateDataUser,
-      data: request.toJson(),
-    );
+  Future<GeneralResponse> updateDataUser(
+      StoreDataUserRequest request, int id) async {
+    final token = await _loadToken();
+    final _response = await _dio.put("${Endpoint.updateDataUser}/$id",
+        data: request.toJson(),
+        options: Options(headers: {"authorization": "Bearer $token"}));
 
     return GeneralResponse.fromJson(_response.data);
   }
 
   Future<GeneralResponse> deleteDataUser(StoreDataUserRequest request) async {
-    final _response =
-        await _dio.delete(Endpoint.deleteDataUser, data: request.toJson());
+    final token = await _loadToken();
+    final _response = await _dio.delete(Endpoint.deleteDataUser,
+        data: request.toJson(),
+        options: Options(headers: {"authorization": "Bearer $token"}));
 
     return GeneralResponse.fromJson(_response.data);
   }

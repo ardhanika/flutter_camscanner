@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:docscan/pages/login/bloc/auth_state.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '/component/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:docscan/pages/login/bloc/auth_bloc.dart';
@@ -38,6 +39,15 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  void _launchURL() async {
+    const url = 'http://camscanner.putraprima.id/register';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   final TextEditingController emailController = TextEditingController(text: "");
 
   final TextEditingController passwordController =
@@ -123,9 +133,7 @@ class _LoginFormState extends State<LoginForm> {
                         style: TextStyle(fontSize: 16),
                       ),
                       GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, "myRoute");
-                          },
+                          onTap: _launchURL,
                           child: Text(" Create One",
                               style: TextStyle(
                                 color: purple,
