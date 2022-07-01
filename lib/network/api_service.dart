@@ -20,12 +20,13 @@ class ApiService {
     return token;
   }
 
-  Future<UserResponse> getDataUser() async {
+  Future<List<UserDataResponse>> getDataUser() async {
     final token = await _loadToken();
     final _response = await _dio.get(Endpoint.getDataUser,
         options: Options(headers: {"authorization": "Bearer $token"}));
-
-    return UserResponse.fromJson(_response.data);
+        return (_response.data as List)
+          .map((x) => UserDataResponse.fromJson(x))
+          .toList();
   }
 
   Future<GeneralResponse> createDataUser(StoreDataUserRequest request) async {
@@ -47,10 +48,9 @@ class ApiService {
     return GeneralResponse.fromJson(_response.data);
   }
 
-  Future<GeneralResponse> deleteDataUser(StoreDataUserRequest request) async {
+  Future<GeneralResponse> deleteDataUser(int id) async {
     final token = await _loadToken();
-    final _response = await _dio.delete(Endpoint.deleteDataUser,
-        data: request.toJson(),
+    final _response = await _dio.delete("${Endpoint.deleteDataUser}/$id",
         options: Options(headers: {"authorization": "Bearer $token"}));
 
     return GeneralResponse.fromJson(_response.data);

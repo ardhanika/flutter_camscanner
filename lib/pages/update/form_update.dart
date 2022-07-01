@@ -90,14 +90,14 @@ class _FormAddScreenState extends State<FormAddScreen> {
                           _controllerDescription.text.toString();
                       String image = _controllerImage.text.toString();
                       StoreDataUserRequest dataUser = StoreDataUserRequest(
-                          idUser: '1',
+                          idUser: 1,
                           nama: nama,
                           description: description,
                           image: image);
                       if (widget.datauser == null) {
                         _apiService.createDataUser(dataUser).then((response) {
                           setState(() => _isLoading = false);
-                          if (response.isSuccess) {
+                          if (response.message == "success") {
                             Navigator.pop(
                                 _scaffoldState.currentState!.context, true);
                           } else {
@@ -113,7 +113,7 @@ class _FormAddScreenState extends State<FormAddScreen> {
                             .updateDataUser(dataUser, widget.datauser.id)
                             .then((response) {
                           setState(() => _isLoading = false);
-                          if (response.isSuccess) {
+                          if (response.message == "success") {
                             Navigator.pop(
                                 _scaffoldState.currentState!.context, true);
                           } else {

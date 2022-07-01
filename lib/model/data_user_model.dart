@@ -43,7 +43,7 @@ class UserDataResponse {
   });
 
   final int id;
-  final String idUser;
+  final int idUser;
   final String nama;
   final String description;
   final String image;

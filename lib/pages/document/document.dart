@@ -27,14 +27,14 @@ class _DocumentState extends State<Document> {
     return SafeArea(
       child: FutureBuilder(
         future: apiService.getDataUser(),
-        builder: (BuildContext context, AsyncSnapshot<UserResponse> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<UserDataResponse>> snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Text(
                   "Something wrong with message: ${snapshot.error.toString()}"),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
-            List<UserDataResponse>? datauser = snapshot.data?.data;
+            List<UserDataResponse>? datauser = snapshot.data;
             return _buildListView(datauser!);
           } else {
             return const Center(
@@ -84,16 +84,10 @@ class _DocumentState extends State<Document> {
                                         onPressed: () {
                                           Navigator.pop(context);
                                           apiService
-                                              .deleteDataUser(
-                                            StoreDataUserRequest(
-                                              idUser: profile.idUser,
-                                              nama: profile.nama,
-                                              description: profile.description,
-                                              image: profile.image,
-                                            ),
+                                              .deleteDataUser(profile.id
                                           )
                                               .then((response) {
-                                            if (response.isSuccess) {
+                                            if (response.message == "success") {
                                               setState(() {});
                                               Scaffold.of(this.context)
                                                   .showSnackBar(const SnackBar(

@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../login/bloc/auth_repository.dart';
+
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
 
@@ -15,7 +17,7 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  late final AuthBloc authBloc = authBloc;
+  late final AuthBloc authBloc = AuthBloc(authRepository: AuthRepository());
 
   void _launchURL() async {
     const url = 'http://camscanner.putraprima.id';

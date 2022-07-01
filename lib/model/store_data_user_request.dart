@@ -19,13 +19,13 @@ class StoreDataUserRequest {
     required this.image,
   });
 
-  final String idUser;
+  final int idUser;
   final String nama;
   final String description;
   final String image;
 
   StoreDataUserRequest copyWith({
-    String? idUser,
+    int? idUser,
     String? nama,
     String? description,
     String? image,

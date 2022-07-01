@@ -6,5 +6,5 @@ class Endpoint {
       'http://camscanner.putraprima.id/api/scanner/store';
   static const updateDataUser = 'http://camscanner.putraprima.id/api/scanner';
   static const deleteDataUser =
-      'http://camscanner.putraprima.id/api/scanner/destroy';
+      'http://camscanner.putraprima.id/api/scanner';
 }
