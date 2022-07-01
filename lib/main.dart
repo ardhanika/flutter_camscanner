@@ -47,9 +47,9 @@ class MyApp extends StatelessWidget {
                 );
           }
           if (state is AuthFailed || state is LoginFailed) {
-             return HomePage(
-                // authBloc: authBloc,
-                );
+            return LoginPage(
+              authBloc: authBloc,
+            );
           }
           if (state is AuthLoading) {
             return Container(
