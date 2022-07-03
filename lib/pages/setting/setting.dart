@@ -1,13 +1,12 @@
 import 'package:docscan/pages/account/account.dart';
 import 'package:docscan/component/theme.dart';
 import 'package:docscan/pages/login/bloc/auth_bloc.dart';
+import 'package:docscan/pages/login/bloc/auth_repository.dart';
 import 'package:docscan/pages/login/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../login/bloc/auth_repository.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -54,26 +53,24 @@ class _SettingPageState extends State<SettingPage> {
               Container(
                 padding: const EdgeInsets.only(top: 30, left: 30),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      CupertinoIcons.profile_circled,
-                      size: 80,
-                      color: purple,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 30),
-                    ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Icon(
+                          Icons.folder_rounded,
+                          size: 80,
+                          color: purple,
+                        ),
                         Text(
-                          'Jaya Mahendra',
+                          'Camscanner',
                           style: text,
                         ),
                         Text(
-                          "Lorem ipsum ",
+                          "Tugas Akhir Camscanner",
                           style: desc,
-                        )
+                        ),
                       ],
                     )
                   ],
@@ -84,25 +81,24 @@ class _SettingPageState extends State<SettingPage> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AccountPage()),
-                          );
-                        },
-                        child: menuSetting(
-                            'Account', 'Lorem ipsum dolor sit amet'),
-                      ),
-                      const Padding(padding: EdgeInsets.only(top: 25)),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => const AccountPage()),
+                      //     );
+                      //   },
+                      //   child: menuSetting(
+                      //       'Account', 'Details about your account'),
+                      // ),
+                      const Padding(padding: EdgeInsets.only(top: 50)),
                       GestureDetector(
                         onTap: _launchURL,
-                        child: menuSetting(
-                            'Go To Website', 'Lorem ipsum dolor sit amet'),
+                        child: menuSetting('Go To Website', 'Open website'),
                       ),
-                      const Padding(padding: EdgeInsets.only(top: 25)),
-                      menuSetting('About App', 'Lorem ipsum dolor sit amet'),
+                      // const Padding(padding: EdgeInsets.only(top: 25)),
+                      // menuSetting('About App', 'Lorem ipsum dolor sit amet'),
                       const Padding(padding: EdgeInsets.only(top: 25)),
                       GestureDetector(
                         onTap: () async {
@@ -116,10 +112,14 @@ class _SettingPageState extends State<SettingPage> {
                               ),
                               (route) => false);
                         },
-                        child:
-                            menuSetting('Logout', 'Lorem ipsum dolor sit amet'),
+                        child: menuSetting('Logout', 'Logout App'),
                       ),
                     ]),
+              ),
+              const Padding(padding: EdgeInsets.only(top: 150)),
+              const Align(
+                alignment: Alignment.bottomCenter,
+                child: Text("©Ardhanika Jaya 2022"),
               )
             ],
           ),
@@ -131,7 +131,7 @@ class _SettingPageState extends State<SettingPage> {
   Row menuSetting(String data, String data1) {
     return Row(children: [
       Icon(
-        Icons.circle_rounded,
+        Icons.document_scanner,
         color: purple,
         size: 40,
       ),

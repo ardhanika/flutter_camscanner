@@ -1,3 +1,4 @@
+import 'package:docscan/component/theme.dart';
 import 'package:docscan/model/store_data_user_request.dart';
 import 'package:flutter/material.dart';
 import 'package:docscan/network/api_service.dart';
@@ -24,25 +25,52 @@ class _DocumentState extends State<Document> {
   @override
   Widget build(BuildContext context) {
     this.context = context;
-    return SafeArea(
-      child: FutureBuilder(
-        future: apiService.getDataUser(),
-        builder: (BuildContext context,
-            AsyncSnapshot<List<UserDataResponse>> snapshot) {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                  "Something wrong with message: ${snapshot.error.toString()}"),
-            );
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            List<UserDataResponse>? datauser = snapshot.data;
-            return _buildListView(datauser!);
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Your Document'),
+      ),
+      body: SafeArea(
+        child: FutureBuilder(
+          future: apiService.getDataUser(),
+          builder: (BuildContext context,
+              AsyncSnapshot<List<UserDataResponse>> snapshot) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                    "Something wrong with message: ${snapshot.error.toString()}"),
+              );
+              // } else if (snapshot.data!.isEmpty) {
+              //   return Column(
+              //     children: [
+              //       Image.asset("assets/images/undraw_home.png"),
+              //       Container(
+              //         padding: const EdgeInsets.all(10),
+              //       ),
+              //       Text(
+              //         "You don't have any documents!",
+              //         style: text,
+              //       ),
+              //       Container(
+              //         padding: const EdgeInsets.all(10),
+              //       ),
+              //       Center(
+              //           child: Text(
+              //         "Scan now to save your documents and storage efficiency",
+              //         style: desc,
+              //         textAlign: TextAlign.center,
+              //       ))
+              //     ],
+              //   );
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              List<UserDataResponse>? datauser = snapshot.data;
+              return _buildListView(datauser!);
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
     );
   }
