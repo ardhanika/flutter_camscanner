@@ -63,8 +63,10 @@ dependencies:
   url_launcher: ^6.1.0
   dio: ^4.0.6
   connectivity_plus: ^2.3.3
-  flutter_genius_scan: ^4.5.2
+  # flutter_genius_scan: ^4.5.2
   open_file: ^3.2.1
+  document_scanner_flutter: ^0.2.7
+  advance_pdf_viewer: ^2.0.1
   
  
 dev_dependencies:

@@ -27,7 +27,8 @@ class _DocumentState extends State<Document> {
     return SafeArea(
       child: FutureBuilder(
         future: apiService.getDataUser(),
-        builder: (BuildContext context, AsyncSnapshot<List<UserDataResponse>> snapshot) {
+        builder: (BuildContext context,
+            AsyncSnapshot<List<UserDataResponse>> snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Text(
@@ -65,7 +66,8 @@ class _DocumentState extends State<Document> {
                       style: Theme.of(context).textTheme.headline6,
                     ),
                     Text(profile.description),
-                    Text(profile.image),
+                    Image.network(
+                        "http://camscanner.putraprima.id/storage/${profile.image}"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
@@ -84,8 +86,7 @@ class _DocumentState extends State<Document> {
                                         onPressed: () {
                                           Navigator.pop(context);
                                           apiService
-                                              .deleteDataUser(profile.id
-                                          )
+                                              .deleteDataUser(profile.id)
                                               .then((response) {
                                             if (response.message == "success") {
                                               setState(() {});

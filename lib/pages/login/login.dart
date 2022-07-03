@@ -1,4 +1,3 @@
-
 import 'package:docscan/pages/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:docscan/pages/login/bloc/auth_state.dart';
