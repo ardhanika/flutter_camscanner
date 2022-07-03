@@ -1,11 +1,11 @@
 class LoginAuth {
-  late String message;
-  late TokenAuth data;
+  late String status;
+  late TokenAuth? data;
 
-  LoginAuth({required this.message, required this.data});
+  LoginAuth({required this.status, required this.data});
   LoginAuth.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    data = TokenAuth.fromJson(json['data']);
+    status = json['status'];
+    data = TokenAuth.fromJson(json['data'] ?? {});
   }
 }
 

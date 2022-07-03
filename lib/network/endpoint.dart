@@ -1,8 +1,8 @@
 class Endpoint {
   const Endpoint._();
 
-  static const getDataUser = 'http://127.0.0.1:8000/api/scanner';
-  static const createDataUser = 'http://127.0.0.1:8000/api/scanner/store';
-  static const updateDataUser = 'http://127.0.0.1:8000/api/scanner/update';
-  static const deleteDataUser = 'http://127.0.0.1:8000/api/scanner/destroy';
+  static const getDataUser = 'http://camscanner.putraprima.id/api/scanner';
+  static const createDataUser = 'http://camscanner.putraprima.id/api/scanner/';
+  static const updateDataUser = 'http://camscanner.putraprima.id/api/scanner';
+  static const deleteDataUser = 'http://camscanner.putraprima.id/api/scanner';
 }

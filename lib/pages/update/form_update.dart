@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:docscan/network/api_service.dart';
 import 'package:docscan/model/data_user_model.dart';
 
-import '/model/store_data_user_request.dart';
+import '/model/update_data_user_request.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
@@ -58,7 +60,6 @@ class _FormAddScreenState extends State<FormAddScreen> {
               children: <Widget>[
                 _buildTextFieldName(),
                 _buildTextFieldEmail(),
-                _buildTextFieldAge(),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: RaisedButton(
@@ -88,39 +89,24 @@ class _FormAddScreenState extends State<FormAddScreen> {
                       String nama = _controllerNama.text.toString();
                       String description =
                           _controllerDescription.text.toString();
-                      String image = _controllerImage.text.toString();
-                      StoreDataUserRequest dataUser = StoreDataUserRequest(
-                          idUser: 1,
-                          nama: nama,
-                          description: description,
-                          image: image);
-                      if (widget.datauser == null) {
-                        _apiService.createDataUser(dataUser).then((response) {
-                          setState(() => _isLoading = false);
-                          if (response.isSuccess) {
-                            Navigator.pop(
-                                _scaffoldState.currentState!.context, true);
-                          } else {
-                            _scaffoldState.currentState!.showSnackBar(SnackBar(
-                              content: Text("Submit data failed"),
-                            ));
-                          }
-                        });
-                      } else {
-                        dataUser =
-                            dataUser.copyWith(idUser: widget.datauser.idUser);
-                        _apiService.updateDataUser(dataUser).then((response) {
-                          setState(() => _isLoading = false);
-                          if (response.isSuccess) {
-                            Navigator.pop(
-                                _scaffoldState.currentState!.context, true);
-                          } else {
-                            _scaffoldState.currentState!.showSnackBar(SnackBar(
-                              content: Text("Update data failed"),
-                            ));
-                          }
-                        });
-                      }
+                      UpdateDataUserRequest dataUser = UpdateDataUserRequest(
+                          idUser: 1, nama: nama, description: description);
+
+                      dataUser =
+                          dataUser.copyWith(idUser: widget.datauser.idUser);
+                      _apiService
+                          .updateDataUser(dataUser, widget.datauser.id)
+                          .then((response) {
+                        setState(() => _isLoading = false);
+                        if (response.message == "success") {
+                          Navigator.pop(
+                              _scaffoldState.currentState!.context, true);
+                        } else {
+                          _scaffoldState.currentState!.showSnackBar(SnackBar(
+                            content: Text("Update data failed"),
+                          ));
+                        }
+                      });
                     },
                     color: Colors.orange[600],
                   ),
@@ -182,25 +168,6 @@ class _FormAddScreenState extends State<FormAddScreen> {
         bool isFieldValid = value.trim().isNotEmpty;
         if (isFieldValid != _isFieldDescriptionValid) {
           setState(() => _isFieldDescriptionValid = isFieldValid);
-        }
-      },
-    );
-  }
-
-  Widget _buildTextFieldAge() {
-    return TextField(
-      controller: _controllerImage,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-        labelText: "Image",
-        errorText: _isFieldImageValid == null || _isFieldImageValid
-            ? null
-            : "Image is required",
-      ),
-      onChanged: (value) {
-        bool isFieldValid = value.trim().isNotEmpty;
-        if (isFieldValid != _isFieldImageValid) {
-          setState(() => _isFieldImageValid = isFieldValid);
         }
       },
     );

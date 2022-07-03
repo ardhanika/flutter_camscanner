@@ -2,6 +2,7 @@
 //
 //     final storeDataUserRequest = storeDataUserRequestFromJson(jsonString);
 
+import 'package:flutter_cache_manager/file.dart';
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
@@ -13,25 +14,25 @@ String storeDataUserRequestToJson(StoreDataUserRequest data) =>
 
 class StoreDataUserRequest {
   StoreDataUserRequest({
-    required this.idUser,
+    // required this.idUser,
     required this.nama,
     required this.description,
     required this.image,
   });
 
-  final int idUser;
+  // final int idUser;
   final String nama;
   final String description;
-  final String image;
+  final File image;
 
   StoreDataUserRequest copyWith({
-    int? idUser,
+    // int? idUser,
     String? nama,
     String? description,
-    String? image,
+    File? image,
   }) =>
       StoreDataUserRequest(
-        idUser: idUser ?? this.idUser,
+        // idUser: idUser ?? this.idUser,
         nama: nama ?? this.nama,
         description: description ?? this.description,
         image: image ?? this.image,
@@ -39,14 +40,14 @@ class StoreDataUserRequest {
 
   factory StoreDataUserRequest.fromJson(Map<String, dynamic> json) =>
       StoreDataUserRequest(
-        idUser: json["idUser"],
+        // idUser: json["idUser"],
         nama: json["nama"],
         description: json["description"],
         image: json["image"],
       );
 
   Map<String, dynamic> toJson() => {
-        "idUser": idUser,
+        // "idUser": idUser,
         "nama": nama,
         "description": description,
         "image": image,

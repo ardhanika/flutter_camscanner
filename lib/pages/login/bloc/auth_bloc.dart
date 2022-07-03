@@ -55,10 +55,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         final login =
             await authRepository.loginUser(event.email, event.password);
-        if (login.message != "failed") {
+        if (login.status == "Success") {
           emit(LoginSuccess());
-          await authRepository.setLocalToken(login.data.token);
-          emit(AuthHasToken(token: login.data.token));
+          await authRepository.setLocalToken(login.data!.token);
+          emit(AuthHasToken(token: login.data!.token));
         }
       } catch (e) {
         emit(LoginFailed("Login Gagal"));

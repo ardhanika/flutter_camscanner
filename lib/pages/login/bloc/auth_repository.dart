@@ -4,11 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
-  Future loginUser(String _email, String _password) async {
-    // String baseUrl = "http://127.0.0.1:8000/api/auth/login";
-    var baseUrl = Uri.parse("http://127.0.0.1:8000/api/auth/login");
-    // String baseUrl = "http://10.0.2.2:8000/api/auth/login";
-    // var baseUrl = Uri.parse("http://10.0.2.2:8000/api/auth/login");
+  Future<LoginAuth> loginUser(String _email, String _password) async {
+    var baseUrl = Uri.parse("http://camscanner.putraprima.id/api/auth/login");
 
     try {
       var response = await http.post(baseUrl, body: {
@@ -19,13 +16,12 @@ class AuthRepository {
       var jsonResponse = json.decode(response.body);
       return LoginAuth.fromJson(jsonResponse);
     } catch (e) {
-      return e;
+      return LoginAuth(status: "failed", data: null);
     }
   }
 
   Future userLogout(String token) async {
-    // String baseUrl = "http://127.0.0.1:8000/api/auth/logout";
-    var baseUrl = Uri.parse("http://10.0.2.2:8000/api/auth/logout");
+    var baseUrl = Uri.parse("http://camscanner.putraprima.id/api/auth/logout");
     try {
       var response = await http.post(baseUrl, headers: {
         'Authorization': 'Bearer $token',
@@ -40,7 +36,7 @@ class AuthRepository {
   }
 
   Future getData(String token) async {
-    String baseUrl = "http://127.0.0.1:8000/api/me";
+    String baseUrl = "http://camscanner.putraprima.id/api/me";
 
     try {
       var response = await http.get(Uri.parse(baseUrl), headers: {

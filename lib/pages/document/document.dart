@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:docscan/network/api_service.dart';
 import 'package:docscan/model/data_user_model.dart';
 
-import '../update/form_update.dart';
+import 'package:docscan/pages/update/form_update.dart';
 
 class Document extends StatefulWidget {
-  const Document({Key? key}) : super(key: key);
-
   @override
   _DocumentState createState() => _DocumentState();
 }
@@ -29,14 +27,15 @@ class _DocumentState extends State<Document> {
     return SafeArea(
       child: FutureBuilder(
         future: apiService.getDataUser(),
-        builder: (BuildContext context, AsyncSnapshot<UserResponse> snapshot) {
+        builder: (BuildContext context,
+            AsyncSnapshot<List<UserDataResponse>> snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Text(
                   "Something wrong with message: ${snapshot.error.toString()}"),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
-            List<UserDataResponse>? datauser = snapshot.data?.data;
+            List<UserDataResponse>? datauser = snapshot.data;
             return _buildListView(datauser!);
           } else {
             return const Center(
@@ -67,7 +66,8 @@ class _DocumentState extends State<Document> {
                       style: Theme.of(context).textTheme.headline6,
                     ),
                     Text(profile.description),
-                    Text(profile.image),
+                    Image.network(
+                        "http://camscanner.putraprima.id/storage/${profile.image}"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
@@ -86,16 +86,9 @@ class _DocumentState extends State<Document> {
                                         onPressed: () {
                                           Navigator.pop(context);
                                           apiService
-                                              .deleteDataUser(
-                                            StoreDataUserRequest(
-                                              idUser: profile.idUser,
-                                              nama: profile.nama,
-                                              description: profile.description,
-                                              image: profile.image,
-                                            ),
-                                          )
+                                              .deleteDataUser(profile.id)
                                               .then((response) {
-                                            if (response.isSuccess) {
+                                            if (response.message == "success") {
                                               setState(() {});
                                               Scaffold.of(this.context)
                                                   .showSnackBar(const SnackBar(
@@ -153,6 +146,7 @@ class _DocumentState extends State<Document> {
     );
   }
 }
+
 
 // II
 // import 'dart:convert';

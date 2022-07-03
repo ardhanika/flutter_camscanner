@@ -13,21 +13,17 @@ String generalResponseToJson(GeneralResponse data) =>
 
 class GeneralResponse {
   GeneralResponse({
-    required this.message,
-    required this.isSuccess,
+    required this.message
   });
 
   final String message;
-  final bool isSuccess;
 
   factory GeneralResponse.fromJson(Map<String, dynamic> json) =>
       GeneralResponse(
-        message: json["message"],
-        isSuccess: json["isSuccess"],
+        message: json["message"]
       );
 
   Map<String, dynamic> toJson() => {
-        "message": message,
-        "isSuccess": isSuccess,
+        "message": message
       };
 }
