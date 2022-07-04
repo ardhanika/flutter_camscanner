@@ -1,9 +1,9 @@
+import 'package:docscan/component/splash3.dart';
 import 'package:docscan/pages/login/bloc/auth_bloc.dart';
 import 'theme.dart';
-import 'splash2.dart';
 import 'package:flutter/material.dart';
 
-class Splash extends StatelessWidget {
+class Splash2 extends StatelessWidget {
   late final AuthBloc authBloc = authBloc;
 
   @override
@@ -34,10 +34,10 @@ class Splash extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.only(top: 40, bottom: 20),
-                    child: Image.asset("assets/images/undraw_splash.png"),
+                    child: Image.asset("assets/images/mobileweb.png"),
                   ),
-                  Text("Get Started", style: desc),
-                  Text("Lets Secure Your Important Documents", style: title),
+                  Text("Progressive App", style: desc),
+                  Text("You can view all data on both devices.", style: title),
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   SizedBox(
                     child: Container(
@@ -49,21 +49,13 @@ class Splash extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             )),
-                        // onPressed: () {
-                        //   Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //         builder: (context) => LoginForm(
-                        //           authBloc: authBloc,
-                        //         ),
-                        //       ));
-                        // },
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Splash2(),
-                              ));
+                                builder: (context) =>Splash3()
+                                ),
+                              );
                         },
                         child: const Text(
                           "Next",
@@ -77,14 +69,3 @@ class Splash extends StatelessWidget {
                 ]))));
   }
 }
-
-
-//  SizedBox(
-//                           width: MediaQuery.of(context).size.width - 40,
-//                           child: TextButton(
-//                             child: Text('test assets'),
-//                             onPressed: _testFromAssets,
-//                             style: TextButton.styleFrom(
-//                               primary: Colors.white,
-//                               backgroundColor: Colors.teal,
-//                               onSurface: Colors.grey,

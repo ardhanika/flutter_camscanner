@@ -103,6 +103,8 @@ flutter:
     - assets/images/search_logo.png
     - assets/images/undraw_home.png
     - assets/images/undraw_splash.png
+    - assets/images/mobileweb.png
+    - assets/images/web.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
