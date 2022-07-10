@@ -45,10 +45,10 @@ class _FormAddScreenState extends State<FormAddScreen> {
     return Scaffold(
       key: _scaffoldState,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
           widget.datauser == null ? "Form Add" : "Change Data",
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
       body: Stack(
@@ -67,7 +67,7 @@ class _FormAddScreenState extends State<FormAddScreen> {
                       widget.datauser == null
                           ? "Submit".toUpperCase()
                           : "Update Data".toUpperCase(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
@@ -79,7 +79,7 @@ class _FormAddScreenState extends State<FormAddScreen> {
                           !_isFieldDescriptionValid ||
                           !_isFieldImageValid) {
                         _scaffoldState.currentState!.showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text("Please fill all field"),
                           ),
                         );
@@ -102,7 +102,8 @@ class _FormAddScreenState extends State<FormAddScreen> {
                           Navigator.pop(
                               _scaffoldState.currentState!.context, true);
                         } else {
-                          _scaffoldState.currentState!.showSnackBar(SnackBar(
+                          _scaffoldState.currentState!
+                              .showSnackBar(const SnackBar(
                             content: Text("Update data failed"),
                           ));
                         }
@@ -116,7 +117,7 @@ class _FormAddScreenState extends State<FormAddScreen> {
           ),
           _isLoading
               ? Stack(
-                  children: <Widget>[
+                  children: const <Widget>[
                     Opacity(
                       opacity: 0.3,
                       child: ModalBarrier(

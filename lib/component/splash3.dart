@@ -1,10 +1,12 @@
+import 'package:docscan/component/splash.dart';
 import 'package:docscan/pages/login/bloc/auth_bloc.dart';
+import 'package:docscan/pages/login/bloc/auth_repository.dart';
 import 'package:docscan/pages/login/login.dart';
 import 'theme.dart';
 import 'package:flutter/material.dart';
 
 class Splash3 extends StatelessWidget {
-  late final AuthBloc authBloc = authBloc;
+  late final AuthBloc authBloc = AuthBloc(authRepository: AuthRepository());
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,8 @@ class Splash3 extends StatelessWidget {
                     child: Image.asset("assets/images/web.png"),
                   ),
                   Text("Website", style: desc),
-                  Text("Follow this https://camscanner.putraprima.id", style: title),
+                  Text("Follow this https://camscanner.putraprima.id",
+                      style: title),
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   SizedBox(
                     child: Container(
@@ -53,9 +56,7 @@ class Splash3 extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => LoginForm(
-                                  authBloc: authBloc,
-                                ),
+                                builder: (context) => Splash(),
                               ));
                         },
                         child: const Text(

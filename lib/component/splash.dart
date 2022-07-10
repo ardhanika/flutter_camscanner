@@ -1,10 +1,11 @@
 import 'package:docscan/pages/login/bloc/auth_bloc.dart';
+import 'package:docscan/pages/login/bloc/auth_repository.dart';
+import 'package:docscan/pages/login/login.dart';
 import 'theme.dart';
-import 'splash2.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatelessWidget {
-  late final AuthBloc authBloc = authBloc;
+  late final AuthBloc authBloc = AuthBloc(authRepository: AuthRepository());
 
   @override
   Widget build(BuildContext context) {
@@ -49,20 +50,13 @@ class Splash extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             )),
-                        // onPressed: () {
-                        //   Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //         builder: (context) => LoginForm(
-                        //           authBloc: authBloc,
-                        //         ),
-                        //       ));
-                        // },
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Splash2(),
+                                builder: (context) => LoginPage(
+                                  authBloc: authBloc,
+                                ),
                               ));
                         },
                         child: const Text(

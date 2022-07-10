@@ -56,7 +56,6 @@ class _SettingPageState extends State<SettingPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
-                      // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Icon(
                           Icons.folder_rounded,

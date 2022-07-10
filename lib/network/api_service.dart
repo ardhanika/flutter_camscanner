@@ -1,15 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:docscan/model/data_model.dart';
 import 'package:docscan/model/data_user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:docscan/network/endpoint.dart';
 import 'package:docscan/model/general_response.dart';
 import 'package:docscan/model/store_data_user_request.dart';
 import 'package:docscan/model/update_data_user_request.dart';
-import 'package:docscan/pages/login/bloc/auth_repository.dart';
-import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
@@ -31,7 +28,7 @@ class ApiService {
         .toList();
   }
 
-  Future<StoreDataUserRequest?> createPresensiDatang(
+  Future<StoreDataUserRequest?> createDataUser(
       String nama, String description, File? image) async {
     try {
       final token = await _loadToken();
@@ -57,21 +54,6 @@ class ApiService {
     }
   }
 
-  // Future<GeneralResponse> createDataUser(StoreDataUserRequest request) async {
-  //   final token = await _loadToken();
-  //   final _response = await _dio.post(Endpoint.createDataUser,
-  //       data: request.toJson(),
-  //       options: Options(
-  //           followRedirects: true,
-  //           validateStatus: (status) => true,
-  //           headers: {
-  //             "Accept": "application/json",
-  //             "authorization": "Bearer $token"
-  //           }));
-
-  //   return GeneralResponse.fromJson(_response.data);
-  // }
-
   Future<GeneralResponse> updateDataUser(
       UpdateDataUserRequest request, int id) async {
     final token = await _loadToken();
@@ -88,14 +70,5 @@ class ApiService {
         options: Options(headers: {"authorization": "Bearer $token"}));
 
     return GeneralResponse.fromJson(_response.data);
-  }
-
-  Future<String> uploadImage(File file) async {
-    String fileName = file.path.split('/').last;
-    FormData formData = FormData.fromMap({
-      "file": await MultipartFile.fromFile(file.path, filename: fileName),
-    });
-    final _response = await _dio.post(Endpoint.createDataUser, data: formData);
-    return _response.data['id'];
   }
 }
